@@ -38,19 +38,19 @@
         ansible_ssh_private_key_file: /home/ec2-user/.aws/mamendola-pem.pem
       loop: "{{ result.instances }}"
 
-- name: Configure EC2
-  hosts: ec2hosts
-  remote_user: ec2-user
-  become: true
+# - name: Configure EC2
+#   hosts: ec2hosts
+#   remote_user: ec2-user
+#   become: true
 
-  tasks:
-    - name: Crear grupo admins
-      ansible.builtin.group:
-        name: admins
-        state: present
-    - name: Ensure user is present
-      ansible.builtin.user:
-        name: mauri
-        shell: /bin/bash
-        groups: admins
-        append: true
+#   tasks:
+#     - name: Crear grupo admins
+#       ansible.builtin.group:
+#         name: admins
+#         state: present
+#     - name: Ensure user is present
+#       ansible.builtin.user:
+#         name: mauri
+#         shell: /bin/bash
+#         groups: admins
+#         append: true
