@@ -1,7 +1,7 @@
+---
 - name: Install httpd Server
-  hosts: {{ servidores }}
+  hosts: "{{ servidores }}"
   
-
   pre_tasks:
     - name: Crear usuarios previamente
       user:   'name={{ item }} shell=/bin/bash groups=wheel state=present'
