@@ -17,7 +17,7 @@
       block:
 
       - name: Get instances facts
-        ec2_instance_facts:
+        community.aws.ec2_instance_facts: 
           aws_access_key: "{{ec2_access_key}}"
           aws_secret_key: "{{ec2_secret_key}}"
           region: "{{ region }}"
@@ -43,7 +43,7 @@
       #     aws_secret_key: "{{ec2_secret_key}}"
 
       - name: Create security group
-        ec2_group:
+        community.aws.ec2_group:
           name: "{{ sec_group }}"
           description: "Sec group for app {{ id }}"
           # vpc_id: 12345
@@ -59,7 +59,7 @@
         register: result_sec_group
 
       - name: Provision instance(s)
-        ec2:
+        community.aws.ec2:
           aws_access_key: "{{ec2_access_key}}"
           aws_secret_key: "{{ec2_secret_key}}"
           key_name: "{{ key_name }}"
