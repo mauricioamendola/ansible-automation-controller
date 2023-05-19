@@ -1,6 +1,7 @@
 ---
 - name: Install httpd Server
   hosts: "{{ servidores }}"
+  become: yes
   
   pre_tasks:
     - name: Crear usuarios previamente
