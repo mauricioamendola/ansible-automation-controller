@@ -39,7 +39,7 @@
 
 - name: Configure EC2
   hosts: ec2hosts
-  ansible_user: ec2-user
+  remote_user: ec2-user
   become: yes
 
   tasks:
