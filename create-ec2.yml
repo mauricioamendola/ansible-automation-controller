@@ -33,19 +33,23 @@
 
     - name: Add all instance public IPs to host group
       ansible.builtin.add_host:
-        hostname: "{{ item.public_ip }}"
+        hostname: "{{ item.public_ip_address }}"
         groups: ec2hosts
       loop: "{{ result.instances }}"
 
 - name: Configure EC2
   hosts: ec2hosts
   remote_user: ec2-user
-  become: yes
+  become: true
 
   tasks:
+    - name: Crear grupo admins
+      ansible.builtin.group:
+        name: admins
+        state: present
     - name: Ensure user is present
       ansible.builtin.user:
         name: mauri
         shell: /bin/bash
-        groups: wheels
+        groups: admins
         append: true
