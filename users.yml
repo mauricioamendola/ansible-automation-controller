@@ -1,0 +1,7 @@
+---
+- name: Create users
+  hosts: "{{ servidores }}"
+  become: yes
+
+  tasks:
+  include_playbooks: tasks/users-all.yml
