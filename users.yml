@@ -4,4 +4,10 @@
   become: yes
 
 
-- import_playbook: tasks/users-all.yml
+  tasks:
+    - name: Add users
+      ansible.builtin.user:
+        name: mauri
+        shell: /bin/bash
+        groups: wheels
+        append: true
