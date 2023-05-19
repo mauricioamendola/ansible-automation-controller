@@ -17,10 +17,9 @@
     subnet: subnet-03d84a11ebe272d96
 
   tasks:
-
     - name: Provision an EC2 instance with a public IP address
       amazon.aws.ec2_instance:
-        name: Demo
+        name: ec2
         key_name: "{{ key_name }}"
         vpc_subnet_id: "{{ subnet }}"
         instance_type: "{{ instance_type }}"
@@ -31,3 +30,22 @@
         tags:
           Environment: Testing
       register: result
+
+    - name: Add all instance public IPs to host group
+      ansible.builtin.add_host:
+        hostname: "{{ item.public_ip }}"
+        groups: ec2hosts
+      loop: "{{ result.instances }}"
+
+- name: Configure EC2
+  hosts: ec2hosts
+  ansible_user: ec2-user
+  become: yes
+
+  tasks:
+    - name: Ensure user is present
+      ansible.builtin.user:
+        name: mauri
+        shell: /bin/bash
+        groups: wheels
+        append: true
