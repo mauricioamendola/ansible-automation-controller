@@ -5,9 +5,13 @@
 
 
   tasks:
+    - name: Crear grupo admins
+      ansible.builtin.group:
+        name: admins
+        state: present
     - name: Add users
       ansible.builtin.user:
         name: mauri
         shell: /bin/bash
-        groups: wheels
+        groups: admins
         append: true
