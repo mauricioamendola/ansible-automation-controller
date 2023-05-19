@@ -3,6 +3,5 @@
   hosts: "{{ servidores }}"
   become: yes
 
-  tasks:
-    - name: crear usuarios
-      import_playbook: tasks/users-all.yml
+
+- import_playbook: tasks/users-all.yml
