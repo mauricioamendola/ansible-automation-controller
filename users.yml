@@ -4,4 +4,5 @@
   become: yes
 
   tasks:
-    import_playbook: tasks/users-all.yml
+    - name: crear usuarios
+      import_playbook: tasks/users-all.yml
