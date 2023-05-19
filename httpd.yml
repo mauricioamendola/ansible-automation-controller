@@ -1,0 +1,13 @@
+---
+- hosts: {{ servidores }}
+  name: Install httpd Server
+
+  pre_tasks:
+    - name: Crear usuarios previamente
+      user:   'name={{ item }} shell=/bin/bash groups=wheel state=present'
+      with_items:
+        - mauricio
+      register: user_accounts
+
+  roles:
+    - httpd 

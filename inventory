@@ -1,0 +1,2 @@
+[linux-app]
+10.0.1.226 ansible_ssh=ec2-user become_root=true

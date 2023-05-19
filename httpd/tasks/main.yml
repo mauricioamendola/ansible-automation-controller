@@ -1,0 +1,31 @@
+---
+- name: Install Apache
+  yum: pkg=httpd.x86_64 state=installed
+  notify: Start httpd
+
+#- name: Chequear no existe document root
+#  action: shell test -d /var/www/html/web && echo "existe" || echo ""
+#  register: dir_creado
+
+- name: Crear document root
+  file: path=/var/www/html/web state=directory
+  #when: dir_creado.stdout != "existe"
+
+- name: Copiar web a document root
+  copy: src=index.html dest=/var/www/html/web
+
+- name: Crear dir de imagenes
+  file: path=/var/www/html/web/images state=directory
+ 
+- name: Copiar imagen a document root
+  copy: src=images/yes.gif dest=/var/www/html/web/images
+
+- name: Crear directorio logs
+  #shell: mkdir /var/log/httpd/lvwansiblesnd.corp.ute.com.uy
+  file: path=/var/log/httpd/lvwansiblesnd.corp.ute.com.uy state=directory
+
+- name: Configurar virtualhost
+  template: src=ansible-web.conf dest=/etc/httpd/conf.d/
+  notify: Restart httpd
+
+   
