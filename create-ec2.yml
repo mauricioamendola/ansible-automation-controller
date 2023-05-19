@@ -9,7 +9,7 @@
       region: '{{ region }}'
 
   vars:
-    key_name: mamendola
+    key_name: mamendola-pem
     region: us-east-1
     image: ami-06640050dc3f556bb
     id: web-app
